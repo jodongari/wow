@@ -34,9 +34,9 @@ public class VideoEntity extends BaseDateTime {
     @Size(max = 500)
     private String description;
 
-    @Column(name = "VIDEO_DELETE_FLAG",
+    @Column(name = "DEL_YN",
             columnDefinition = "boolean default false")
-    private Boolean deleteFlag;
+    private Boolean deleteYn;
 
     @Column(name = "VIDEO_LIKE_COUNT",
             columnDefinition = "int default 0")
@@ -49,6 +49,9 @@ public class VideoEntity extends BaseDateTime {
     @Column(name = "VIDEO_RUNNING_TIME", nullable = false)
     private Long runningTime;
 
+
+
+
     @Builder
     public VideoEntity(String videoHash, String videoName, String manifestPath, String description, Boolean deleteFlag,
                        Long likeCount, Long dislikeCount, Long runningTime) {
@@ -56,7 +59,7 @@ public class VideoEntity extends BaseDateTime {
         this.videoName = videoName;
         this.manifestPath = manifestPath;
         this.description = description;
-        this.deleteFlag = deleteFlag;
+        this.deleteYn = deleteFlag;
         this.likeCount = likeCount;
         this.dislikeCount = dislikeCount;
         this.runningTime = runningTime;

@@ -13,9 +13,9 @@ import javax.validation.constraints.Size;
 
 @Getter
 @Entity
-@Table(name = "USER")
+@Table(name = "USER_INFO")
 @NoArgsConstructor
-public class UserEntity extends BaseDateTime {
+public class UserInfoEntity extends BaseDateTime {
 
     @Id
     @Column(name="USER_HASH", nullable = false)
@@ -28,32 +28,32 @@ public class UserEntity extends BaseDateTime {
 
     @Column(name="USER_PWD", nullable = false)
     @Size(max = 32)
-    private String userPwd;
+    private String userPassword;
 
     @Column(name="USER_NM", nullable = false)
     @Size(max = 100)
-    private String userNm;
+    private String userName;
 
     @Column(name="USER_NICK_NM", nullable = false)
     @Size(max = 100)
-    private String userNickNm;
+    private String userNickName;
 
     @Column(name="DEL_YN",
             columnDefinition = "boolean default false")
-    private Boolean delYn;
+    private Boolean deleteYn;
 
     @Column(name="PROFILE_IMG_PATH")
     @Size(max = 300)
-    private String profileImgPath;
+    private String profileImagePath;
 
     @Builder
-    public UserEntity(String userHash, String userEmail, String userPwd, String userNm, String userNickNm, Boolean delYn, String profileImgPath) {
+    public UserInfoEntity(String userHash, String userEmail, String userPassword, String userName, String userNickName, Boolean deleteYn, String profileImagePath) {
         this.userHash = userHash;
         this.userEmail = userEmail;
-        this.userPwd = userPwd;
-        this.userNm = userNm;
-        this.userNickNm = userNickNm;
-        this.delYn = delYn;
-        this.profileImgPath = profileImgPath;
+        this.userPassword = userPassword;
+        this.userName = userName;
+        this.userNickName = userNickName;
+        this.deleteYn = deleteYn;
+        this.profileImagePath = profileImagePath;
     }
 }
