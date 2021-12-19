@@ -53,17 +53,24 @@ public class FileStoreService {
         return System.getProperty("user.home");
     }
 
-    public String saveOriginFile(MultipartFile file, TypeOfMedia type) throws IOException {
-        String dirPath = getHomeDir() + File.separator +
+    public String makeDirPath(TypeOfMedia type){
+        return getHomeDir() + File.separator +
                 type.toString() + File.separator +
                 "original" + File.separator +
                 LocalDate.now();
+    }
 
-        String fileName = String.format(
+    public String makeFileName(MultipartFile file){
+        return String.format(
                 "%s.%s",
                 UUID.randomUUID(),
                 FilenameUtils.getExtension(file.getOriginalFilename())
         );
+    }
+
+    public String saveOriginFile(MultipartFile file, TypeOfMedia type) throws IOException {
+        String dirPath = makeDirPath(type);
+        String fileName = makeFileName(file);
 
         File dir = new File(dirPath);
         if (!dir.exists()) {
@@ -71,8 +78,7 @@ public class FileStoreService {
         }
 
         String location = dirPath + File.separator + fileName;
-        Path path = Paths.get(location);
-        Files.write(path, file.getBytes());
+        Files.write(Paths.get(location), file.getBytes());
         return location;
     }
 
