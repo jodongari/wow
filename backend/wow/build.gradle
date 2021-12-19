@@ -27,7 +27,7 @@ dependencies {
 	runtimeOnly 'com.h2database:h2'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	implementation group: 'net.bramp.ffmpeg', name: 'ffmpeg', version: '0.6.2'
+	implementation 'net.bramp.ffmpeg:ffmpeg:0.6.2'
 }
 
 test {

@@ -18,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -61,14 +60,10 @@ public class FileStoreService {
     }
 
     public String makeFileName(MultipartFile file){
-        return String.format(
-                "%s.%s",
-                UUID.randomUUID(),
-                FilenameUtils.getExtension(file.getOriginalFilename())
-        );
+        return UUID.randomUUID() + "." + FilenameUtils.getExtension(file.getOriginalFilename());
     }
 
-    public String saveOriginFile(MultipartFile file, TypeOfMedia type) throws IOException {
+    public String saveOriginalFile(MultipartFile file, TypeOfMedia type) throws IOException {
         String dirPath = makeDirPath(type);
         String fileName = makeFileName(file);
 
