@@ -139,6 +139,7 @@ public class FileStoreService {
     }
 
     public void getThumbnailByVideo(String filePath) {
+
     }
 
 }
