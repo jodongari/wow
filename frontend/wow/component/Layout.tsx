@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import NavBar from "./header/Nav";
+import NavBar from "./header/NavBar";
 import Header from "./header/Header"
 import VideoList from "./video/VideoList";
 import axios from "axios";
