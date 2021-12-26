@@ -2,15 +2,27 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+####1. check your node -v
+```bash
+$ node -v // # v16.13.1
+$ npm -v  // # v8.3.0 
+
+# Change npm version 
+$ npm install -g npm@8.3.0
+```
+####2. install node package
+```bash 
+$ npm install
+```
+####3. run the development server
 
 ```bash
 npm run dev
 # or
 yarn dev
 ```
-
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
 
 You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
