@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-####1. check your node -v
+#### 1. check your node -v
 ```bash
 $ node -v // # v16.13.1
 $ npm -v  // # v8.3.0 
@@ -10,11 +10,11 @@ $ npm -v  // # v8.3.0
 # Change npm version 
 $ npm install -g npm@8.3.0
 ```
-####2. install node package
+#### 2. install node package
 ```bash 
 $ npm install
 ```
-####3. run the development server
+#### 3. run the development server
 
 ```bash
 npm run dev
