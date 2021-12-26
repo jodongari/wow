@@ -1,4 +1,4 @@
-package jodongari.wow.video.repository;
+package jodongari.wow.video.repository.entity;
 
 import jodongari.wow.common.BaseDateTime;
 import lombok.Builder;
