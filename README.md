@@ -16,4 +16,4 @@
   - React (v17.0.2)
   - next.js (v12.0.7)
 - Support
-  - FFmpeg
+  - FFmpeg (v4.4.1)
