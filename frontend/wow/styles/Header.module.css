@@ -1,8 +1,9 @@
 .myMenu {
-    float: left;
+    float: right;
+    line-height: 10px;
+    padding-bottom: 2.5rem;
 }
 
 .icon {
-    padding-bottom: 3.2rem;
-    padding-left: 5rem;
+    padding-left: 1.5rem;
 }

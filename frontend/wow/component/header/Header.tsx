@@ -5,14 +5,20 @@ import styles from "../../styles/Header.module.css"
 const Header = () => {
     return (
         <div>
-            <span className={styles.myMenu}>
+            <span>
                 <img src="http://placehold.it/100x50"/>
             </span>
-            <span >
-                <Icon name='video camera' size='big' className={styles.icon}/>
-                <Icon name='bell' size='big' className={styles.icon}/>
-                <Icon name='user' size='big' className={styles.icon}/>
-            </span>
+            <div className={styles.myMenu}>
+                <span className={styles.icon}>
+                    <Icon name='video camera' size='big' className={styles.icon}/>
+                </span>
+                <span className={styles.icon}>
+                    <Icon name='bell' size='big' className={styles.icon}/>
+                </span>
+                <span className={styles.icon}>
+                    <Icon name='user' size='big' className={styles.icon}/>
+                </span>
+            </div>
         </div>
     );
 };

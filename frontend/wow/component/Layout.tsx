@@ -3,7 +3,6 @@ import NavBar from "./header/Nav";
 import Header from "./header/Header"
 import VideoList from "./video/VideoList";
 import axios from "axios";
-// import styles from "../styles/header.module.css"
 
 const Layout = () => {
 
