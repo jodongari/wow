@@ -17,11 +17,7 @@ public class VideoApiController {
 
     private final VideoApiService videoApiService;
 
-    @PostMapping(value = VideoApiUrl.VIDEO_UPLOAD,
-    consumes = {
-            MediaType.MULTIPART_FORM_DATA_VALUE,
-            MediaType.APPLICATION_OCTET_STREAM_VALUE
-    })
+    @PostMapping(value = VideoApiUrl.VIDEO_UPLOAD)
     public ResponseEntity<VideoUploadResponse> upload(@ModelAttribute VideoUploadRequest request) {
         return videoApiService.upload(request);
     }
