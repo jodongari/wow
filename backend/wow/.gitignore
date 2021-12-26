@@ -12,7 +12,7 @@ build/
 /src/main/resources/static/index.html
 /src/main/resources/video/**
 /src/main/resources/ffmpeg/**
-
+*.log
 
 ### STS ###
 .apt_generated
