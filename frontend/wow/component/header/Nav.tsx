@@ -1,7 +1,7 @@
 import {Menu, Segment} from 'semantic-ui-react'
 import {NextPage} from "next";
 
-const NavBar: NextPage = () => {
+const Nav: NextPage = () => {
 
     const activeItem: string = 'home';
     return (
@@ -24,4 +24,4 @@ const NavBar: NextPage = () => {
     )
 }
 
-export default NavBar
+export default Nav
