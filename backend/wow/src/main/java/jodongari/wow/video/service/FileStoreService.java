@@ -1,5 +1,6 @@
 package jodongari.wow.video.service;
 
+import jodongari.wow.video.dto.SavedFileInfo;
 import lombok.extern.slf4j.Slf4j;
 import net.bramp.ffmpeg.FFmpeg;
 import net.bramp.ffmpeg.FFmpegExecutor;
@@ -52,29 +53,34 @@ public class FileStoreService {
         return System.getProperty("user.home");
     }
 
-    public String makeDirPath(TypeOfMedia type){
-        return getHomeDir() + File.separator +
-                type.toString() + File.separator +
-                "original" + File.separator +
-                LocalDate.now();
+    public double getVideoRunningTime(String location) throws IOException {
+        return ffprobe.probe(location).getFormat().duration;
     }
 
-    public String makeFileName(MultipartFile file){
-        return UUID.randomUUID() + "." + FilenameUtils.getExtension(file.getOriginalFilename());
-    }
+    public SavedFileInfo saveOriginalFile(MultipartFile mFile, TypeOfMedia type) throws IOException {
+        String randomUUID = String.valueOf(UUID.randomUUID());
+        String extension = FilenameUtils.getExtension(mFile.getOriginalFilename());
+        String fileName = randomUUID + "." + extension;
 
-    public String saveOriginalFile(MultipartFile file, TypeOfMedia type) throws IOException {
-        String dirPath = makeDirPath(type);
-        String fileName = makeFileName(file);
+        String dirPath = getHomeDir() + File.separator +
+                LocalDate.now() + File.separator +
+                randomUUID + File.separator +
+                type.toString();
 
-        File dir = new File(dirPath);
+        String originalFilePath = dirPath + File.separator + "Original";
+
+        File dir = new File(originalFilePath);
         if (!dir.exists()) {
             dir.mkdirs();
         }
 
-        String location = dirPath + File.separator + fileName;
-        Files.write(Paths.get(location), file.getBytes());
-        return location;
+        String filePath = originalFilePath + File.separator + fileName;
+        Files.write(Paths.get(filePath), mFile.getBytes());
+
+        return SavedFileInfo.builder()
+                .manifestPath(dirPath)
+                .runningTime((long) Math.ceil(getVideoRunningTime(filePath)))
+                .build();
     }
 
     public void compressVideo(String fileName, String format) throws IOException {
