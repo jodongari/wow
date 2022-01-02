@@ -8,11 +8,12 @@ import axios from "axios";
 
 const Home: NextPage = () => {
 
+    // 영상 List 를 요청할 URL
+    const API_VIDEO_URL = "http://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline"
     const [list, setList] = useState<any>([]);
-    const API_URL = "http://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline"
+
     const getDate = () => {
-        axios.get(API_URL).then((res) => {
-            console.log(res.data);
+        axios.get(API_VIDEO_URL).then((res) => {
             setList(res.data);
         })
     }
