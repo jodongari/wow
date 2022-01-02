@@ -8,7 +8,9 @@ const Header = () => {
 
     const moveRouteHandler = (page: string) => {
         if(page === 'upload'){
-            router.push('/about')
+            router.push('/upload');
+        } else if (page === 'myPage'){
+            router.push("/myPage");
         }
     }
 
@@ -24,7 +26,7 @@ const Header = () => {
                 <span className={styles.icon}>
                     <Icon name='bell' size='big' className={styles.icon}/>
                 </span>
-                <span className={styles.icon}>
+                <span className={styles.icon} onClick={() => {moveRouteHandler('myPage')}}>
                     <Icon name='user' size='big' className={styles.icon}/>
                 </span>
             </div>
