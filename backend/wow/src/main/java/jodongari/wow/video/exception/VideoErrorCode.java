@@ -1,4 +1,4 @@
-package jodongari.wow.exception;
+package jodongari.wow.video.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 @AllArgsConstructor
-public enum ErrorCode {
+public enum VideoErrorCode {
 
     /* valid exception */
     METHOD_ARGUMENT_NOT_VALID(HttpStatus.BAD_REQUEST, "유효하지 않은 인자입니다. 다시 확인해주세요."),
@@ -28,5 +28,4 @@ public enum ErrorCode {
 
     private final HttpStatus status;
     private final String message;
-
 }
