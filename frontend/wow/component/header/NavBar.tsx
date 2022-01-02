@@ -2,13 +2,19 @@ import {Menu, Segment} from 'semantic-ui-react'
 import {NextPage} from "next";
 import Link from "next/link";
 import React, {useState} from "react";
+import {useRouter} from "next/router";
 
 const NavBar: NextPage = () => {
-
+    const router = useRouter();
     const [activeItem, setActiveItem] = useState('home');
 
     const changeActiveItem = (menuItem: string) => {
-       setActiveItem(menuItem)
+        setActiveItem(menuItem)
+        if(menuItem === "home"){
+            router.push("/");
+        } else if(menuItem === 'about'){
+            router.push("/about")
+        }
     }
 
     return (
@@ -22,11 +28,11 @@ const NavBar: NextPage = () => {
                 >
                 </Menu.Item>
                 </Link>
-                <Link href="/MyPage">
+                <Link href="/about">
                 <Menu.Item
-                    name='messages'
-                    active={activeItem === 'messages'}
-                    onClick={() => changeActiveItem('messages')}
+                    name='about'
+                    active={activeItem === 'about'}
+                    onClick={() => changeActiveItem('about')}
                 />
                 </Link>
                 <Menu.Item
