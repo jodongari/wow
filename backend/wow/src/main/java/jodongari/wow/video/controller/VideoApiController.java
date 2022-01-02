@@ -18,6 +18,7 @@ public class VideoApiController {
 
     @PostMapping(value = VideoApiUrl.VIDEO_UPLOAD)
     public ResponseEntity<VideoUploadResponse> upload(@Valid @ModelAttribute VideoUploadRequest request) {
+        // test
         return videoApiService.upload(request);
     }
 }
