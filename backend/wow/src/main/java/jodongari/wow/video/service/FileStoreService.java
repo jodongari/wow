@@ -58,7 +58,7 @@ public class FileStoreService {
     }
 
     public SavedFileInfo saveOriginalFile(MultipartFile mFile, TypeOfMedia type) throws IOException {
-        String randomUUID = String.valueOf(UUID.randomUUID());
+        String randomUUID = String.valueOf(UUID.randomUUID()).replace("-", "");
         String extension = FilenameUtils.getExtension(mFile.getOriginalFilename());
         String fileName = randomUUID + "." + extension;
 
