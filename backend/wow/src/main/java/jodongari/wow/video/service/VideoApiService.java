@@ -1,5 +1,6 @@
 package jodongari.wow.video.service;
 
+import jodongari.wow.video.dto.SavedFileInfo;
 import jodongari.wow.video.dto.request.VideoUploadRequest;
 import jodongari.wow.video.dto.response.VideoUploadResponse;
 import jodongari.wow.video.repository.VideoRepository;
@@ -21,14 +22,14 @@ public class VideoApiService {
     public ResponseEntity<VideoUploadResponse> upload(VideoUploadRequest request) {
 
         try {
-            final String manifestPath = fileStoreService.saveOriginalFile(request.getVideo(), FileStoreService.TypeOfMedia.Videos);
+            final SavedFileInfo savedFileInfo = fileStoreService.saveOriginalFile(request.getVideo(), FileStoreService.TypeOfMedia.Videos);
 
             final VideoEntity entity = VideoEntity.builder()
                     .videoHash(request.getVideoName()) // need to hashing
                     .videoName(request.getVideoName())
-                    .manifestPath(manifestPath)
+                    .manifestPath(savedFileInfo.getManifestPath())
                     .description(request.getDescription())
-                    .runningTime(1L)
+                    .runningTime(savedFileInfo.getRunningTime())
                     .build();
 
             videoRepository.save(entity);
