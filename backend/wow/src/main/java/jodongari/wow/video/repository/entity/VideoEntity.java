@@ -48,7 +48,6 @@ public class VideoEntity extends BaseDateTime {
 
     @Column(name = "VIDEO_RUNNING_TIME", nullable = false)
     private Long runningTime;
-
     @Builder
     public VideoEntity(String videoHash, String videoName, String manifestPath, String description, Boolean deleteYn, Long likeCount, Long dislikeCount, Long runningTime) {
         this.videoHash = videoHash;

@@ -74,13 +74,11 @@ public class VideoApiService {
     public ResponseEntity<ResultResponse> getList() {
 
         List<VideoEntity> videoList = videoRepository.findAll();
-        return new ResponseEntity<>(
-                                        ResultResponse.builder()
-                                            .error(null)
-                                            .success(true)
-                                            .response(videoList)
-                                            .build(),
-                                        HttpStatus.OK
-                                    );
+        return new ResponseEntity<>(ResultResponse.builder()
+                                                  .error(null)
+                                                  .success(true)
+                                                  .response(videoList)
+                                                  .build(),
+                                    HttpStatus.OK);
     }
 }
