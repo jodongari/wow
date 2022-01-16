@@ -1,6 +1,7 @@
 package jodongari.wow.video.controller;
 
 import jodongari.wow.video.config.VideoApiUrl;
+import jodongari.wow.video.dto.request.VideoDownloadRequest;
 import jodongari.wow.video.dto.request.VideoUploadRequest;
 import jodongari.wow.video.dto.response.VideoUploadResponse;
 import jodongari.wow.video.service.VideoApiService;
@@ -19,5 +20,11 @@ public class VideoApiController {
     @PostMapping(value = VideoApiUrl.VIDEO_UPLOAD)
     public ResponseEntity<VideoUploadResponse> upload(@Valid @ModelAttribute VideoUploadRequest request) {
         return videoApiService.upload(request);
+    }
+
+    @GetMapping(value = VideoApiUrl.VIDEO_DOWNLOAD)
+    @ResponseBody
+    public ResponseEntity<byte[]> download(VideoDownloadRequest request) {
+        return videoApiService.download(request);
     }
 }

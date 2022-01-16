@@ -24,7 +24,10 @@ public enum VideoErrorCode {
     NOT_FOUND(HttpStatus.NOT_FOUND, "페이지를 찾을 수 없습니다."),
 
     /* 405 exception */
-    METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED, "허용되지 않은 메서드입니다.");
+    METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED, "허용되지 않은 메서드입니다."),
+
+    /* 500 exception */
+    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "예기치 못한 오류가 발생했습니다.");
 
     private final HttpStatus status;
     private final String message;
