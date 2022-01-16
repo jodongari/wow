@@ -1,5 +1,6 @@
 package jodongari.wow.video.service;
 
+import jodongari.wow.protocol.ResultResponse;
 import jodongari.wow.video.dto.SavedFileInfo;
 import jodongari.wow.video.dto.request.VideoDownloadRequest;
 import jodongari.wow.video.dto.request.VideoUploadRequest;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -66,5 +68,17 @@ public class VideoApiService {
             log.error("file download error: {}", request.getManifestPath(), e);
             throw new VideoException(VideoErrorCode.INTERNAL_SERVER_ERROR);
         }
+    }
+
+
+    public ResponseEntity<ResultResponse> getList() {
+
+        List<VideoEntity> videoList = videoRepository.findAll();
+        return new ResponseEntity<>(ResultResponse.builder()
+                                                  .error(null)
+                                                  .success(true)
+                                                  .response(videoList)
+                                                  .build(),
+                                    HttpStatus.OK);
     }
 }
