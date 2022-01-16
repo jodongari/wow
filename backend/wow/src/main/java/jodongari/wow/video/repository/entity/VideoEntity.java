@@ -59,5 +59,6 @@ public class VideoEntity extends BaseDateTime {
         this.likeCount = likeCount;
         this.dislikeCount = dislikeCount;
         this.runningTime = runningTime;
+
     }
 }
