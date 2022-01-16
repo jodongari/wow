@@ -24,9 +24,9 @@ const VideoItem = ({item}: any) => {
                     <strong className={styles.tit_item}>{name}</strong>
                     <strong className={styles.num_price}>${price}</strong>
                     <span className={styles.txt_info}>
-            {category ? `${category}/` : ""}
+                        {category ? `${category}/` : ""}
                         {product_type}
-          </span>
+                    </span>
                     <Button color="orange">시청하기</Button>
                 </div>
             </div>
