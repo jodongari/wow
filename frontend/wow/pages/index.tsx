@@ -1,4 +1,4 @@
-import type {NextPage} from 'next'
+import type {GetServerSideProps, GetStaticProps, NextPage} from 'next'
 import Head from 'next/head'
 import 'semantic-ui-css/semantic.min.css'
 import styles from "../styles/Home.module.css"
@@ -29,7 +29,7 @@ const Home: NextPage = ({list}: any) => {
     )
 }
 
-export async function getStaticProps(){
+export const getServerSideProps: GetServerSideProps = async () => {
     const apiUrl: any = process.env.apiUrl;
     const res = await axios.get(apiUrl);
     const data = res.data;
@@ -39,7 +39,7 @@ export async function getStaticProps(){
             list: data,
             name: process.env.name,
         },
-    };
+    }
 }
 export default Home
 
