@@ -25,6 +25,7 @@ dependencies {
 	implementation 'commons-fileupload:commons-fileupload:1.2.1'
 	implementation 'commons-io:commons-io:1.4'
 	implementation 'net.bramp.ffmpeg:ffmpeg:0.6.2'
+	implementation 'commons-codec:commons-codec:1.15'
 
 	// logging
 	implementation 'org.slf4j:slf4j-api:1.7.7'
