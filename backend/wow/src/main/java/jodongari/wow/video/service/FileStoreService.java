@@ -1,6 +1,7 @@
 package jodongari.wow.video.service;
 
 import jodongari.wow.video.dto.SavedFileInfo;
+import jodongari.wow.video.dto.request.VideoUploadRequest;
 import lombok.extern.slf4j.Slf4j;
 import net.bramp.ffmpeg.FFmpeg;
 import net.bramp.ffmpeg.FFmpegExecutor;
@@ -10,6 +11,7 @@ import net.bramp.ffmpeg.builder.FFmpegBuilder;
 import net.bramp.ffmpeg.probe.FFmpegProbeResult;
 import net.bramp.ffmpeg.progress.Progress;
 import net.bramp.ffmpeg.progress.ProgressListener;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -57,17 +59,18 @@ public class FileStoreService {
         return ffprobe.probe(location).getFormat().duration;
     }
 
-    public SavedFileInfo saveOriginalFile(MultipartFile mFile, TypeOfMedia type) throws IOException {
-        String randomUUID = String.valueOf(UUID.randomUUID()).replace("-", "");
-        String extension = FilenameUtils.getExtension(mFile.getOriginalFilename());
-        String fileName = randomUUID + "." + extension;
+    public SavedFileInfo saveOriginalFile(VideoUploadRequest request, TypeOfMedia type) throws IOException {
 
-        String dirPath = getHomeDir() + File.separator +
+        final String videoHash = DigestUtils.md5Hex(request.getVideoName() + System.currentTimeMillis());
+        final String extension = FilenameUtils.getExtension(request.getVideo().getOriginalFilename());
+        final String fileName = videoHash + "." + extension;
+
+        final String dirPath = getHomeDir() + File.separator +
                 LocalDate.now() + File.separator +
-                randomUUID + File.separator +
+                videoHash + File.separator +
                 type.toString();
 
-        String originalFilePath = dirPath + File.separator + "Original";
+        final String originalFilePath = dirPath + File.separator + "Original";
 
         File dir = new File(originalFilePath);
         if (!dir.exists()) {
@@ -75,9 +78,10 @@ public class FileStoreService {
         }
 
         String filePath = originalFilePath + File.separator + fileName;
-        Files.write(Paths.get(filePath), mFile.getBytes());
+        Files.write(Paths.get(filePath), request.getVideo().getBytes());
 
         return SavedFileInfo.builder()
+                .videoHash(videoHash)
                 .manifestPath(dirPath)
                 .runningTime((long) Math.ceil(getVideoRunningTime(filePath)))
                 .build();

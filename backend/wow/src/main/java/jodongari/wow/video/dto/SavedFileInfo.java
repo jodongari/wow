@@ -9,11 +9,13 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class SavedFileInfo {
+    String videoHash;
     String manifestPath;
     Long runningTime;
 
     @Builder
-    public SavedFileInfo(String manifestPath, Long runningTime){
+    public SavedFileInfo(String videoHash, String manifestPath, Long runningTime){
+        this.videoHash = videoHash;
         this.manifestPath = manifestPath;
         this.runningTime = runningTime;
     }

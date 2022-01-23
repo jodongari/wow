@@ -32,17 +32,17 @@ public class VideoApiService {
     public ResponseEntity<VideoUploadResponse> upload(VideoUploadRequest request) {
 
         try {
-            final SavedFileInfo savedFileInfo = fileStoreService.saveOriginalFile(request.getVideo(), FileStoreService.TypeOfMedia.Videos);
+            final SavedFileInfo savedFileInfo = fileStoreService.saveOriginalFile(request, FileStoreService.TypeOfMedia.Videos);
 
-            final VideoEntity entity = VideoEntity.builder()
-                    .videoHash(request.getVideoName()) // need to hashing
+            final VideoEntity videoEntity = VideoEntity.builder()
+                    .videoHash(savedFileInfo.getVideoHash())
                     .videoName(request.getVideoName())
                     .manifestPath(savedFileInfo.getManifestPath())
                     .description(request.getDescription())
                     .runningTime(savedFileInfo.getRunningTime())
                     .build();
 
-            videoRepository.save(entity);
+            videoRepository.save(videoEntity);
 
         } catch (IOException e) {
             e.printStackTrace();
