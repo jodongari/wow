@@ -51,11 +51,11 @@ public class VideoApiService {
         return new ResponseEntity<VideoUploadResponse>(HttpStatus.OK);
     }
 
-    public ResponseEntity<byte[]> download(VideoDownloadRequest request) {
+    public ResponseEntity<byte[]> download(String request) throws IOException {
         RandomAccessFile file = null;
 
         try {
-            file = new RandomAccessFile(request.getManifestPath(), "r");
+            file = new RandomAccessFile("/Users/macho/Desktop/Test1/" + request, "r");
 
             byte[] result = new byte[(int)file.length()];
             file.readFully(result);
@@ -65,8 +65,11 @@ public class VideoApiService {
 
             return new ResponseEntity<>(result, headers, HttpStatus.OK);
         } catch (IOException e) {
-            log.error("file download error: {}", request.getManifestPath(), e);
+            //log.error("file download error: {}", request.getManifestPath(), e);
             throw new VideoException(VideoErrorCode.INTERNAL_SERVER_ERROR);
+        }
+        finally {
+            file.close();
         }
     }
 
