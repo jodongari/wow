@@ -1,8 +1,7 @@
 import React from 'react';
 import {Button, Header} from "semantic-ui-react";
 import styles from "../../styles/Item.module.css"
-import {GetServerSideProps} from "next";
-import axios from "axios";
+import Head from 'next/head';
 
 const VideoItem = ({item}: { item: any }) => {
     const {
@@ -17,10 +16,16 @@ const VideoItem = ({item}: { item: any }) => {
     } = item;
     return (
         <>
+            <Head>
+                <script async src="http://cdn.dashjs.org/v3.1.0/dash.all.min.js"></script>
+            </Head>
             <div className={styles.wrap}>
-                <div className={styles.img_item}>
-                    <img src={image_link} alt={name}/>
-                </div>
+                <video className={styles.video}
+                       data-dashjs-player
+                       autoPlay
+                       src="https://dash.akamaized.net/envivio/EnvivioDash3/manifest.mpd"
+                       controls>
+                </video>
                 <div className={styles.info_item}>
                     <strong className={styles.tit_item}>{name}</strong>
                     <strong className={styles.num_price}>${price}</strong>
