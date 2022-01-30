@@ -2,6 +2,7 @@ package jodongari.wow.video.service;
 
 import jodongari.wow.video.dto.SavedFileInfo;
 import jodongari.wow.video.dto.request.VideoUploadRequest;
+import jodongari.wow.video.script.ScriptManager;
 import lombok.extern.slf4j.Slf4j;
 import net.bramp.ffmpeg.FFmpeg;
 import net.bramp.ffmpeg.FFmpegExecutor;
@@ -16,7 +17,6 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,12 +30,14 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class FileStoreService {
 
+    private ScriptManager scriptManager;
     FFmpeg ffmpeg = null;
     FFprobe ffprobe = null;
 
     public FileStoreService(
-            @Value("${server.compression.ffmpeg}") String ffmpegPath,
+            ScriptManager scriptManager, @Value("${server.compression.ffmpeg}") String ffmpegPath,
             @Value("${server.compression.ffprobe}") String ffprobePath) throws IOException {
+        this.scriptManager = scriptManager;
 
         // Mac ver
         ffmpeg = new FFmpeg();
@@ -79,6 +81,8 @@ public class FileStoreService {
 
         String filePath = originalFilePath + File.separator + fileName;
         Files.write(Paths.get(filePath), request.getVideo().getBytes());
+
+        scriptManager.makeCommand(originalFilePath, videoHash, extension, request.getVideoName());
 
         return SavedFileInfo.builder()
                 .videoHash(videoHash)
