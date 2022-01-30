@@ -9,10 +9,7 @@ const About = () => {
                 <Head>
                     <script async src="http://cdn.dashjs.org/v3.1.0/dash.all.min.js"></script>
                 </Head>
-                <video data-dashjs-player autoPlay src="~/api/video/VIDEO_DOWNLOAD"
-                       controls>
-                </video>
-                <video data-dashjs-player autoPlay src="https://dash.akamaized.net/envivio/EnvivioDash3/manifest.mpd"
+                <video data-dashjs-player autoPlay src="http://localhost:3000/api/video/v1/videoDownload/mpddash.mpd"
                        controls>
                 </video>
             </div>
