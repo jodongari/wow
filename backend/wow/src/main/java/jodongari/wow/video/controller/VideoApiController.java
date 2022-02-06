@@ -35,7 +35,7 @@ public class VideoApiController {
 
     @GetMapping(value = VideoApiUrl.VIDEO_DOWNLOAD + "/{m4sFileName}")
     @ResponseBody
-    public ResponseEntity<byte[]> download(@RequestHeader String videoHash, @PathVariable String m4sFileName) {
+    public ResponseEntity<byte[]> download(@RequestHeader("x-video-hash") String videoHash, @PathVariable String m4sFileName) {
         try{
             return videoApiService.download(videoHash, m4sFileName);
         } catch (Exception e){
