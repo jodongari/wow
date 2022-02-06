@@ -73,6 +73,10 @@ public class VideoApiService {
         }
     }
 
+    public ResponseEntity<byte[]> getManifestFile(String videoHash) throws IOException {
+        return null;
+    }
+
 
     public ResponseEntity<ResultResponse> getList() {
 
