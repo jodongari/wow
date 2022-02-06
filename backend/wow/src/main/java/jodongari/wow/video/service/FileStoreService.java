@@ -86,7 +86,7 @@ public class FileStoreService {
 
         return SavedFileInfo.builder()
                 .videoHash(videoHash)
-                .manifestPath(dirPath)
+                .manifestPath(originalFilePath)
                 .runningTime((long) Math.ceil(getVideoRunningTime(filePath)))
                 .build();
     }
