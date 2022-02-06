@@ -23,16 +23,21 @@ public class VideoApiController {
         return videoApiService.upload(request);
     }
 
-    // hash -> DB 주소 -> 주소로
-    // 1. 해시코드로 동영상을 요청함
-    // 2. DB에서 해당 해시코드 동영상의 주소를 가져옴
-    // 3. 로컬캐시에 HashMap<해시코드, 주소> 형태로 주소를 저장해서 가져온다?
-
-    @GetMapping(value = VideoApiUrl.VIDEO_DOWNLOAD + "/{path}")
+    @GetMapping(value = VideoApiUrl.VIDEO_MANIFEST + "/{videoHash}")
     @ResponseBody
-    public ResponseEntity<byte[]> download(@PathVariable String path) {
+    public ResponseEntity<byte[]> getManifestFile(@PathVariable String videoHash) {
         try{
-            return videoApiService.download(path);
+            return videoApiService.getManifestFile(videoHash);
+        } catch (Exception e){
+            return null;
+        }
+    }
+
+    @GetMapping(value = VideoApiUrl.VIDEO_DOWNLOAD + "/{m4sFile}")
+    @ResponseBody
+    public ResponseEntity<byte[]> download(@PathVariable String m4sFile) {
+        try{
+            return videoApiService.download(m4sFile);
         } catch (Exception e){
             return null;
         }
