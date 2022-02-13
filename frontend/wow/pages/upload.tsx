@@ -32,7 +32,7 @@ const Upload = () => {
         fd.append("videoName", videoName);
         fd.append("description", "sample description");
 
-        axios.post('http://localhost:8080/board/WriteBoard.do', fd, {
+        axios.post('http://localhost:3000/api/video/v1/upload', fd, {
             headers: {
                         "Content-Type": `multipart/form-data; `,
                      },
