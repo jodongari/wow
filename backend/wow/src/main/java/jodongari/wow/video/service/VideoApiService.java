@@ -52,8 +52,7 @@ public class VideoApiService {
     }
 
     public ResponseEntity<byte[]> videoDownload(String fileName) throws IOException {
-        String videoHash = fileName.substring(0, fileName.indexOf('.')); // 형식에 맞지 않으면 exception 처리하자.
-
+        String videoHash = fileName.substring(0, 32);
         String filePath = videoRepository.findById(videoHash).get().getManifestPath();
         RandomAccessFile file = null;
 
