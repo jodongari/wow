@@ -51,35 +51,14 @@ public class VideoApiService {
         return new ResponseEntity<VideoUploadResponse>(HttpStatus.OK);
     }
 
-    public ResponseEntity<byte[]> download(String videoHash, String m4sFileName) throws IOException {
-        String filePath = videoRepository.findById(videoHash).get().getManifestPath();
-        RandomAccessFile file = null;
+    public ResponseEntity<byte[]> videoDownload(String fileName) throws IOException {
+        String videoHash = fileName.substring(0, fileName.indexOf('.')); // 형식에 맞지 않으면 exception 처리하자.
 
-        try {
-            file = new RandomAccessFile(filePath + "/" + m4sFileName, "r");
-
-            byte[] result = new byte[(int)file.length()];
-            file.readFully(result);
-
-            final HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.MULTIPART_FORM_DATA);
-
-            return new ResponseEntity<>(result, headers, HttpStatus.OK);
-        } catch (IOException e) {
-            //log.error("file download error: {}", request.getManifestPath(), e);
-            throw new VideoException(VideoErrorCode.INTERNAL_SERVER_ERROR);
-        }
-        finally {
-            file.close();
-        }
-    }
-
-    public ResponseEntity<byte[]> getManifestFile(String videoHash) throws IOException {
         String filePath = videoRepository.findById(videoHash).get().getManifestPath();
         RandomAccessFile file = null;
 
         try{
-            file = new RandomAccessFile(filePath + "/" + videoHash + ".mpd", "r");
+            file = new RandomAccessFile(filePath + "/" + fileName, "r");
 
             byte[] result = new byte[(int)file.length()];
             file.readFully(result);
