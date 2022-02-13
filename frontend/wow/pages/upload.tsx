@@ -32,13 +32,32 @@ const Upload = () => {
         fd.append("videoName", videoName);
         fd.append("description", "sample description");
 
-        axios.post('http://localhost:3000/api/video/v1/upload', fd, {
+        // axios.post('http://localhost:3000/api/video/v1/upload', fd, {
+        //     headers: {
+        //                 "Content-Type": `multipart/form-data; `,
+        //              },
+        // }).then(res => {
+        //     console.log(res);
+        // })
+
+        axios(
+          {
+            url: 'http://localhost:3000/api/video/v1/upload',
+            method: 'post',
             headers: {
-                        "Content-Type": `multipart/form-data; `,
-                     },
-        }).then(res => {
-            console.log(res);
-        })
+              "Content-Type": `multipart/form-data`,
+            },
+            data: {
+                video: video,
+                videoName: videoName,
+                description: "sample Description"
+            },
+            // baseURL: 'http://localhost:8080'
+            //withCredentials: true,
+          }
+        ).then(function (response) {
+         console.log(response)
+        });
     }
 
     return (
