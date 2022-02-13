@@ -23,21 +23,11 @@ public class VideoApiController {
         return videoApiService.upload(request);
     }
 
-    @GetMapping(value = VideoApiUrl.VIDEO_MANIFEST + "/{videoHash}")
+    @GetMapping(value = VideoApiUrl.VIDEO_DOWNLOAD + "/{fileName}")
     @ResponseBody
-    public ResponseEntity<byte[]> getManifestFile(@PathVariable String videoHash) {
+    public ResponseEntity<byte[]> videoDownload(@PathVariable String fileName) {
         try{
-            return videoApiService.getManifestFile(videoHash);
-        } catch (Exception e){
-            return null;
-        }
-    }
-
-    @GetMapping(value = VideoApiUrl.VIDEO_DOWNLOAD + "/{m4sFileName}")
-    @ResponseBody
-    public ResponseEntity<byte[]> download(@RequestHeader("x-video-hash") String videoHash, @PathVariable String m4sFileName) {
-        try{
-            return videoApiService.download(videoHash, m4sFileName);
+            return videoApiService.videoDownload(fileName);
         } catch (Exception e){
             return null;
         }
