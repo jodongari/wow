@@ -5,60 +5,31 @@ import axios from "axios";
 // Router Test 용으로 이후 Upload Page 를 구현할 예정입니다.
 const Upload = () => {
 
-    const [videoFile, setVideoFile] = useState([]);
-    const [videoName, setVideoName] = useState("");
-    const [description, setDescription] = useState("");
-
-    let video: any;
+    const [videoFile, setVideoFile] = useState('');
+    const [videoName, setVideoName] = useState('');
+    const [description, setDescription] = useState('');
 
     const onFileUploadHandler = (e: any) => {
-
+        e.preventDefault();
         setVideoFile(e.target.files[0]);
         setVideoName(e.target.files[0].name);
-        video = e.target.files[0]
-        console.log(e.target.files[0]);
-        console.log("나와라 비디오");
-        console.log(videoFile);
-        console.log(video);
-
-        console.log(e.target.files[0].name);
-        // setVideoName(videoFile.name);
-    }
+        setDescription("test description");
+    };
 
     const onClickUploadListener = (e: any) => {
-        console.log("업로드 버튼을 클릭했습니다");
         const fd = new FormData();
-        fd.append("video", video);
+        fd.append("video", videoFile);
         fd.append("videoName", videoName);
-        fd.append("description", "sample description");
+        fd.append("description", description);
 
-        // axios.post('http://localhost:3000/api/video/v1/upload', fd, {
-        //     headers: {
-        //                 "Content-Type": `multipart/form-data; `,
-        //              },
-        // }).then(res => {
-        //     console.log(res);
-        // })
-
-        axios(
-          {
-            url: 'http://localhost:3000/api/video/v1/upload',
-            method: 'post',
+        axios.post('http://localhost:3000/api/video/v1/upload', fd, {
             headers: {
-              "Content-Type": `multipart/form-data`,
-            },
-            data: {
-                video: video,
-                videoName: videoName,
-                description: "sample Description"
-            },
-            // baseURL: 'http://localhost:8080'
-            //withCredentials: true,
-          }
-        ).then(function (response) {
-         console.log(response)
-        });
-    }
+                        "Content-Type": "application/json",
+                     },
+        }).then(res => {
+            console.log(res);
+        })
+    };
 
     return (
         <div>
